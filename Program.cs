@@ -6,13 +6,39 @@ class Program
     {
         string file = "Mileage.txt";
         List<TrainingEntry> data = ReadFile(file);
-        Console.WriteLine(data.Count);
         Options(data, file);
     } 
 
-    static void Graphing()
+    static void Graphing(List<TrainingEntry> data)
     {
-        
+        int[] mileage = new int[data.Count];
+        for(int i = 0; i < data.Count; i++)
+        {
+            int item = data[i].mileage;
+            mileage[i] = item;
+        }
+
+        decimal max = mileage.Max();
+        decimal graphHeight = 10;
+        decimal graphWidth = 20;
+        string[,] graph = new string[mileage.Length, (int)graphHeight];
+        for (int i = 0; i < mileage.Count(); i ++)
+        {
+            for (int j = 0; j < graphHeight; j++) graph[i,j] = " ";
+            decimal height = mileage[i] / max * graphHeight - 1;
+            Console.WriteLine(data[i].mileage);
+            graph[i,(int)height] = "*";
+        }
+        for (int i = (int)graphHeight-1; i >= 0; i--)
+            {
+                for (int j = 0; j < graph.Length/10; j++)
+                {
+                    Console.Write(graph[j,i]);
+                }
+                Console.WriteLine();
+            }
+
+
     }
     static void Options(List<TrainingEntry> data, string file)
     {
@@ -32,6 +58,8 @@ class Program
                     Totals.crossTraining += entry.crossTraining;
                 }
                 Console.WriteLine($"{Totals.mileage} miles, {Totals.crossTraining} hrs of cross training");
+                Console.WriteLine();
+                Graphing(data);
                 
                 break;
                 
@@ -46,7 +74,7 @@ class Program
 
             int mileage = Getinput("What was last weeks mileage? ");
             int crossTraining = Getinput("How long did you spend cross training? ");
-            DateTime date = DateTime.Now;
+            DateTime date = DateTime.Today;
 
             data.Add(new TrainingEntry() {date = date, mileage = mileage, crossTraining = crossTraining});
             WriteFile(data, file);
