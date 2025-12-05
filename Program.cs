@@ -4,6 +4,7 @@ class Program
 {
     static void Main()
     {
+        Console.Clear();
         string file = "Mileage.txt";
         List<TrainingEntry> data = ReadFile(file);
         Options(data, file);
@@ -63,6 +64,7 @@ class Program
         1. View Mileage
         2. Input Mileage
         3. Exit");
+        Console.Clear();
         switch (number)
         {
             case 1: //View Mileage
@@ -76,6 +78,10 @@ class Program
             Console.WriteLine($"{Totals.mileage} miles, {Totals.crossTraining} hrs of cross training");
             Console.WriteLine();
             Graphing(data);
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue ");
+            Console.ReadKey(true);
+            Console.Clear();
             Options(data, file);
             
             break;
@@ -83,6 +89,10 @@ class Program
 
             case 2: //Input Mileage
             EnterMileage(data, file);
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue ");
+            Console.ReadKey(true);
+            Console.Clear();
             Options(data, file);
             break;
 
@@ -110,8 +120,7 @@ class Program
         bool success = false;
         int mileage = 0;
         while (!success) 
-        {    
-            Console.Clear();
+        {
             Console.Write(message);
             Console.WriteLine();
             string? input = Console.ReadLine();
