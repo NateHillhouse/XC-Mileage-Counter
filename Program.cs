@@ -61,26 +61,33 @@ class Program
         Console.WriteLine();
         int number = Getinput(@"What would you like to do?
         1. View Mileage
-        2. Input Mileage");
+        2. Input Mileage
+        3. Exit");
         switch (number)
         {
             case 1: //View Mileage
-                TrainingEntry Totals = new TrainingEntry() {date = DateTime.Today, mileage = 0, crossTraining = 0};
-                foreach (TrainingEntry entry in data)
-                {
-                    Console.WriteLine($"Date: {entry.date.Date}, Miles: {entry.mileage}, Cross Training: {entry.crossTraining} hrs");
-                    Totals.mileage += entry.mileage;
-                    Totals.crossTraining += entry.crossTraining;
-                }
-                Console.WriteLine($"{Totals.mileage} miles, {Totals.crossTraining} hrs of cross training");
-                Console.WriteLine();
-                Graphing(data);
-                
-                break;
+            TrainingEntry Totals = new TrainingEntry() {date = DateTime.Today, mileage = 0, crossTraining = 0};
+            foreach (TrainingEntry entry in data)
+            {
+                Console.WriteLine($"Date: {entry.date.Date}, Miles: {entry.mileage}, Cross Training: {entry.crossTraining} hrs");
+                Totals.mileage += entry.mileage;
+                Totals.crossTraining += entry.crossTraining;
+            }
+            Console.WriteLine($"{Totals.mileage} miles, {Totals.crossTraining} hrs of cross training");
+            Console.WriteLine();
+            Graphing(data);
+            Options(data, file);
+            
+            break;
                 
 
             case 2: //Input Mileage
             EnterMileage(data, file);
+            Options(data, file);
+            break;
+
+            case 3:
+
             break;
         }
 
