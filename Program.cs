@@ -26,11 +26,26 @@ class Program
         {
             for (int j = 0; j < graphHeight; j++) graph[i,j] = " ";
             decimal height = mileage[i] / max * graphHeight - 1;
-            Console.WriteLine(data[i].mileage);
+            int nextItem = data[i].mileage;
+            int previousItem = data[i].mileage;
+            if (!(i+1 >= data.Count)) nextItem = data[i+1].mileage;
+            if (!(i-1 <= 0)) previousItem = data[i-1].mileage;
+            
+            
             graph[i,(int)height] = "*";
+            if (nextItem < data[i].mileage && previousItem < data[i].mileage) graph[i,(int)height] = "^";
+            else if (nextItem > data[i].mileage && previousItem > data[i].mileage) graph[i,(int)height] = "v";
+            else if (nextItem > data[i].mileage) graph[i,(int)height] = "/";
+            else if (nextItem == data[i].mileage) graph[i,(int)height] = "-";
+            else if (nextItem < data[i].mileage) graph[i,(int)height] = "\\";
+            
         }
         for (int i = (int)graphHeight-1; i >= 0; i--)
             {
+                if (i == graphHeight-1) Console.Write(max + " ");
+                else if (i == (int)(graphHeight-1) /2) Console.Write((int)(graphHeight-1)/2 + " ");
+                else if (i == 0) Console.Write(0 + " ");
+                else Console.Write("  ");
                 for (int j = 0; j < graph.Length/10; j++)
                 {
                     Console.Write(graph[j,i]);
