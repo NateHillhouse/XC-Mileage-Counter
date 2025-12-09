@@ -3,7 +3,6 @@
 // A Console application to track running mileage
 // CS1400
 using System.Diagnostics;
-using System.Runtime;
 
 class Program
 {
@@ -21,93 +20,97 @@ class Program
 
     static void Graphing(List<TrainingEntry> data)
     {
-        //Transform data into an array for display
-        double[] mileage = new double[data.Count];
-        for(int i = 0; i < data.Count; i++)
+        if (data.Count > 0)
         {
-            double item = data[i].mileage;
-            mileage[i] = item;
-        }
-
-        double max = mileage.Max();
-
-        //Used to determine how many spaces tall the graph takes
-        double graphHeight = 10;
-        string[,] graph = new string[mileage.Length, (int)graphHeight];
-
-        //Write each row
-        for (int i = 0; i < mileage.Count(); i ++)
-        {
-
-            
-            for (int j = 0; j < graphHeight; j++) graph[i,j] = " ";
-            double height = mileage[i] / max * graphHeight - 1;
-
-            //Set each character needed as "█"
-            for (int x = (int)height; x>=0; x--) graph[i,x] = "█";
-            
-            /*
-            //Attempt at a line graph; changed to bar graph
-            //I have left this in case I would like to return to it at a later date
-
-            int nextItem = data[i].mileage;
-            int previousItem = data[i].mileage;
-            if (!(i+1 >= data.Count)) nextItem = data[i+1].mileage;
-            if (!(i-1 <= 0)) previousItem = data[i-1].mileage;
-
-            if (nextItem < data[i].mileage && previousItem < data[i].mileage) graph[i,(int)height] = "█";
-            else if (nextItem > data[i].mileage && previousItem > data[i].mileage) graph[i,(int)height] = "v";
-            else if (nextItem > data[i].mileage) graph[i,(int)height] = "/";
-            else if (nextItem == data[i].mileage) graph[i,(int)height] = "_";
-            else if (nextItem < data[i].mileage) graph[i,(int)height] = "\\";
-            else if (nextItem < data[i].mileage && data[i].mileage < i) graph[i, (int)height] = "|";
-            */
-            
-        }
-        string[] numberLengths = [max.ToString(), ((graphHeight-1) /2).ToString()];
-        int longestNumber = 1;
-        foreach (string item in numberLengths) if (item.Length > longestNumber) longestNumber = item.Length;
-        //Write the graph to the console
-        for (int i = (int)graphHeight-1; i >= 0; i--)
+            //Transform data into an array for display
+            double[] mileage = new double[data.Count];
+            for(int i = 0; i < data.Count; i++)
             {
-                //Top number
-                if (i == graphHeight-1)
-                {
-                    Console.Write(max);
-                    WriteSpace(longestNumber - max.ToString().Length);
-                }
-                //Middle number
-                else if (i == (int)(graphHeight-1) /2) 
-                {
-                    Console.Write((int)max/2);
-                    WriteSpace(longestNumber - ((int)max/2).ToString().Length);
-                }
-                else if (i == 0) 
-                {
-                    Console.Write(1);
-                    WriteSpace(longestNumber-1);
-                }
-                else WriteSpace(longestNumber);
-                for (int j = 0; j < graph.Length/10; j++)
-                {
-                    Console.Write(graph[j,i]);
-                }
-                Console.WriteLine();
+                double item = data[i].mileage;
+                mileage[i] = item;
             }
 
-void WriteSpace(int number)
-        {
-            for (int j = 0; j < number; j++) Console.Write(" ");
-        }
+            double max = mileage.Max();
 
-    //Get average mileage
-    int sum = 0; int count = 0;
-    foreach (int item in mileage) {
-        sum += item;
-        count ++;
-    }
-    Console.WriteLine($"Your average mileage is: {(double)sum / count}");
-    NextWeeksMileage(data);
+            //Used to determine how many spaces tall the graph takes
+            double graphHeight = 10;
+            string[,] graph = new string[mileage.Length, (int)graphHeight];
+
+            //Write each row
+            for (int i = 0; i < mileage.Count(); i ++)
+            {
+
+                
+                for (int j = 0; j < graphHeight; j++) graph[i,j] = " ";
+                double height = mileage[i] / max * graphHeight - 1;
+
+                //Set each character needed as "█"
+                for (int x = (int)height; x>=0; x--) graph[i,x] = "█";
+                
+                /*
+                //Attempt at a line graph; changed to bar graph
+                //I have left this in case I would like to return to it at a later date
+
+                int nextItem = data[i].mileage;
+                int previousItem = data[i].mileage;
+                if (!(i+1 >= data.Count)) nextItem = data[i+1].mileage;
+                if (!(i-1 <= 0)) previousItem = data[i-1].mileage;
+
+                if (nextItem < data[i].mileage && previousItem < data[i].mileage) graph[i,(int)height] = "█";
+                else if (nextItem > data[i].mileage && previousItem > data[i].mileage) graph[i,(int)height] = "v";
+                else if (nextItem > data[i].mileage) graph[i,(int)height] = "/";
+                else if (nextItem == data[i].mileage) graph[i,(int)height] = "_";
+                else if (nextItem < data[i].mileage) graph[i,(int)height] = "\\";
+                else if (nextItem < data[i].mileage && data[i].mileage < i) graph[i, (int)height] = "|";
+                */
+                
+            }
+            string[] numberLengths = [max.ToString(), ((graphHeight-1) /2).ToString()];
+            int longestNumber = 1;
+            foreach (string item in numberLengths) if (item.Length > longestNumber) longestNumber = item.Length;
+            //Write the graph to the console
+            for (int i = (int)graphHeight-1; i >= 0; i--)
+                {
+                    //Top number
+                    if (i == graphHeight-1)
+                    {
+                        Console.Write(max);
+                        WriteSpace(longestNumber - max.ToString().Length);
+                    }
+                    //Middle number
+                    else if (i == (int)(graphHeight-1) /2) 
+                    {
+                        Console.Write((int)max/2);
+                        WriteSpace(longestNumber - ((int)max/2).ToString().Length);
+                    }
+                    else if (i == 0) 
+                    {
+                        Console.Write(1);
+                        WriteSpace(longestNumber-1);
+                    }
+                    else WriteSpace(longestNumber);
+                    for (int j = 0; j < graph.Length/10; j++)
+                    {
+                        Console.Write(graph[j,i]);
+                    }
+                    Console.WriteLine();
+                }
+
+            void WriteSpace(int number)
+                    {
+                        for (int j = 0; j < number; j++) Console.Write(" ");
+                    }
+
+                //Get average mileage
+                int sum = 0; int count = 0;
+                foreach (int item in mileage) {
+                    sum += item;
+                    count ++;
+                }
+                Console.WriteLine($"Your average mileage is: {(double)sum / count}");
+                NextWeeksMileage(data);
+        }
+        else Console.WriteLine("You do not have enough data to display a graph");
     }
             static void NextWeeksMileage(List<TrainingEntry> data)
         {
