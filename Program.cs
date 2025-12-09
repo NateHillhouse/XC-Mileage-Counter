@@ -96,7 +96,7 @@ class Program
                     Console.WriteLine();
                 }
 
-            void WriteSpace(int number)
+            static void WriteSpace(int number)
                     {
                         for (int j = 0; j < number; j++) Console.Write(" ");
                     }
@@ -133,7 +133,6 @@ class Program
         4. Exit");
         Console.Clear();
         
-        Debug.Assert(number > 0 && number < 5);
 
         //Sort the data incase new data is added
         data = data.OrderBy(x => x.date).ToList();
@@ -229,6 +228,8 @@ class Program
             input = Console.ReadLine();
             success = double.TryParse(input, out mileage);
         }
+        Debug.Assert(mileage >= 0);
+
         return mileage;
     }
 

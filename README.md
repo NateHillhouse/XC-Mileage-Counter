@@ -105,7 +105,7 @@ User sees:
 
 ## Testing
 
-Basic automated tests were implemented using `Debug.Assert` to verify that:
+Basic automated tests were implemented using Debug.Assert to verify that:
 - Mileage entries are sorted correctly by date
 - Data structures behave as expected when modified
 
