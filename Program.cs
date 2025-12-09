@@ -1,4 +1,7 @@
-﻿
+﻿// Mileage Tracker
+// Nathan Hillhouse
+// A Console application to track running mileage
+// CS1400
 
 class Program
 {
@@ -39,6 +42,7 @@ class Program
             for (int x = (int)height; x>=0; x--) graph[i,x] = "█";
             
             /*
+            //Attempt at a line graph; changed to bar graph
             int nextItem = data[i].mileage;
             int previousItem = data[i].mileage;
             if (!(i+1 >= data.Count)) nextItem = data[i+1].mileage;
@@ -118,22 +122,22 @@ class Program
             Options(data, file);
             break;
 
-            case 3:
+            case 3: //Graph Mileage
             Graphing(data);
             ReturnToMain();
             Options(data, file);
             break;
 
-            case 4:
-
+            case 4: //Exit
             break;
 
-            default:
+            default: //Retry input
             Console.Clear();
             Console.WriteLine("Please Pick a Valid Number. ");
             Options(data, file);
             break;
         }
+
         static void ReturnToMain()
         {
             Console.WriteLine();
@@ -186,7 +190,6 @@ class Program
     {
         List<TrainingEntry> info = new List<TrainingEntry>();
         
-        //info = info.OrderBy(x => x.date).ToList();
         string[] fileinfo = File.ReadAllLines(file);
         for (int line = 0; line < fileinfo.Count(); line++)
         {
@@ -203,8 +206,6 @@ class Program
     }
     static void WriteFile(List<TrainingEntry> trainingEntries, string path)
     {
-        
-        //trainingEntries = trainingEntries.OrderBy(x => x.date).ToList();
         List<string> info = new List<string>();
         foreach (TrainingEntry line in trainingEntries)
         {
@@ -213,7 +214,7 @@ class Program
         File.WriteAllLines(path, info);
     }
 
-    class TrainingEntry
+    class TrainingEntry //Holds main data
     {
         public DateTime date {get; set;}
         public int mileage {get; set;}
