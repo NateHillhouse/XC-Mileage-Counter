@@ -2,6 +2,9 @@
 // Nathan Hillhouse
 // A Console application to track running mileage
 // CS1400
+
+//:2f - edit numbers to have less digits
+
 using System.Diagnostics;
 
 class Program
@@ -107,7 +110,7 @@ class Program
                     sum += item;
                     count ++;
                 }
-                Console.WriteLine($"Your average mileage is: {(double)sum / count}");
+                Console.WriteLine($"Your average mileage is: {(double)sum / count :#.##}");
                 NextWeeksMileage(data);
         }
         else Console.WriteLine("You do not have enough data to display a graph");
@@ -120,7 +123,7 @@ class Program
                 if (i < data.Count-1) averages.Add((data[i].mileage + data[i].mileage)/2);
             }
             double avgIncrease = averages.Average();
-            Console.WriteLine($"Next weeks mileage {data[data.Count-1].mileage * 1.05}");
+            Console.WriteLine($"Next weeks mileage {data[data.Count-1].mileage * avgIncrease/100 +1 :#.00}"); ////////////////////////////////////////
         }
     static void Options(List<TrainingEntry> data, string file)
     {
@@ -155,7 +158,7 @@ class Program
                 Console.Write("|");
                 for (int i = 16; i > 0; i--) Console.Write("-");
                 Console.WriteLine("|");
-                Console.WriteLine($"{Totals.mileage,3+6} {"|" ,3} {Totals.crossTraining,8} {"|" ,7}");
+                Console.WriteLine($"{Totals.mileage,3+6 :#.00} {"|" ,3} {Totals.crossTraining,8} {"|" ,7}");
                 Console.WriteLine();
                 ReturnToMain();
                 Options(data, file);

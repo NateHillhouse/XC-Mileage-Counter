@@ -149,6 +149,5 @@ This project appropriately demonstrates the use of the following concepts:
     - Used to contain training data
 ---
 
-## Conclusion
 
 
